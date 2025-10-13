@@ -1,0 +1,68 @@
+---
+# Detect_Vehicle configuration file
+
+# Runtime
+device: "cpu"            # cpu or cuda:0
+seed: 42
+verbose: true
+
+# Model
+model:
+  weights: "weights/best.pt"   # path to YOLO weights
+  img_size: 640
+  conf_thres: 0.25
+  iou_thres: 0.45
+  tracker: "bytetrack.yaml"    # used by ultralytics.track
+
+# Data / Classes
+data:
+  dataset_yaml: "scripts/dataset/data.yaml"
+  # Class id to name mapping (id must match your trained model)
+nc: 11
+names: ['bus', 'double-pick-up', 'mini_bus', 'sedan', 'single-pick-up', 'suv', 'trailer', 'truck_10w', 'truck_6w', 'tuk-tuk', 'van']
+
+
+# Counting / ROI
+counting:
+  mode: "line"                 # line | roi
+  # If mode=line
+  line: [0, 500, 1920, 500]     # x1,y1,x2,y2
+  direction: "down"            # up | down | left | right
+  # If mode=roi
+  roi: [100, 100, 800, 600]     # x1,y1,x2,y2
+  interval_minutes: 15          # export interval for CSV
+
+# Output
+output:
+  csv_dir: "CSV"                # folder to save exported CSVs
+  snapshots_dir: "snapshots"    # optional frame crops
+  save_snapshots: true
+
+# Database (PostgreSQL)
+database:
+  enabled: true
+  host: "localhost"
+  user: "postgres"
+  password: "Your_PASSWORD_HERE"
+  database: "vehicle_detection_db"
+  port: 5432
+
+# API / Dashboard
+api:
+  enabled: true
+  host: "0.0.0.0"
+  port: 8000
+
+dashboard:
+  enabled: true
+  host: "127.0.0.1"
+  port: 8050
+
+# Real-time Pipeline Settings
+pipeline:
+  buffer_size: 10
+  detection_interval: 0.033  # ~30 FPS
+  db_update_interval: 30     # seconds
+  reconnect_retries: 5
+  reconnect_delay: 2
+

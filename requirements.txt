@@ -1,0 +1,17 @@
+fastapi==0.118.3
+numpy==2.3.3
+opencv_contrib_python==4.12.0.88
+opencv_python==4.11.0.86
+opencv_python_headless==4.12.0.88
+pandas==2.3.3
+plotly==6.3.1
+psycopg2_binary==2.9.10
+pydantic==2.12.0
+PyYAML==6.0.2
+PyYAML==6.0.3
+Requests==2.32.5
+streamlit==1.50.0
+# torch==2.8.0+cu129 ให้ทำการติดตั้งตามเว็บไซต์ https://pytorch.org/ 
+# แล้ว copy pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126 แบบนี้ตามสเปคของเครื่อง ใส่ใน Terminal ที่อยู่ใน venv
+ultralytics==8.3.190
+uvicorn==0.37.0
