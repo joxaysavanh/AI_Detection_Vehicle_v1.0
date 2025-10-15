@@ -232,3 +232,5 @@ device: "cuda:0"  # ใน config.yaml
 device: "cpu"  # ใน config.yaml
 ```
 
+#   A I _ D e t e c t i o n _ V e h i c l e _ v 1 . 0  
+ 
