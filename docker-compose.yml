@@ -23,7 +23,7 @@ services:
 
     volumes:
       # ผูก Volume เพื่อให้ Container สามารถเข้าถึงไฟล์วิดีโอ (ถ้าใช้ไฟล์วิดีโอ)
-      - E:/Luam/yolov11_2/test_vehicle_videos/v4.mp4:/app/videos  
+      - <Host Path your video>:/app/videos  
       # ผูก Volume สำหรับการเก็บ Output/Snapshots
       - ./output_data:/app/output_data
       # # ผูก Volume สำหรับการแสดงผล GUI (ถ้าต้องการให้หน้าต่าง OpenCV แสดงผล)
