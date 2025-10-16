@@ -2,7 +2,7 @@
 # Detect_Vehicle configuration file
 
 # Runtime
-device: "cpu"            # cpu or cuda:0
+device: 0           # cpu or cuda:0
 seed: 42
 verbose: true
 
@@ -41,7 +41,7 @@ output:
 # Database (PostgreSQL)
 database:
   enabled: true
-  host: "localhost"
+  host: "db"
   user: "postgres"
   password: "Your_PASSWORD_HERE"
   database: "vehicle_detection_db"

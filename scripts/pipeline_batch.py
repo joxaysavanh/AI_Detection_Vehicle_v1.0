@@ -410,7 +410,7 @@ def process_video_and_count(video_path, model_path_best, model_path_yolo12xl, in
     # --- Main Processing Loop ---
     
     counter = Counter(count_line_coords_list=count_line_coords_list)
-    output_folder = 'D:/NUOL Year 3/Intern/ISS/Project/Detect_Vehicle_Connect/CSV'
+    output_folder = '/app/output_data/CSV'
     db_conn = _get_db_connection()
     if db_conn:
         print("✅ DB saving enabled")
@@ -765,7 +765,7 @@ def process_video_and_count(video_path, model_path_best, model_path_yolo12xl, in
 
 if __name__ == '__main__':
     # ตั้งค่า path ของคุณ
-    video_path = "Your_VIDEO" # webcam '0'
+    video_path = "E:/Luam/yolov11_2/test_vehicle_videos/v4.mp4" # webcam = 0
     your_model_path = '../weights/best.pt'
     yolo12xl_model_path = '../weights/yolo12x.pt'
     

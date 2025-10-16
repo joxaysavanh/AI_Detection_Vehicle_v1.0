@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+
+# 1. APPLICATION SERVICE (PYTHON + YOLO)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vehicle_detection_app
+
+    environment:
+
+      POSTGRES_HOST: DB
+      POSTGRES_USER: user_detection
+      POSTGRES_PASSWORD: password_detection
+      POSTGRES_DB: db_detection
+
+      DISPLAY: ${DISPLAY}
+
+    devices:
+      - /dev/video0:/dev/video0  # ผูกอุปกรณ์กล้อง (ถ้าใช้กล้องเว็บแคม)
+
+    volumes:
+      # ผูก Volume เพื่อให้ Container สามารถเข้าถึงไฟล์วิดีโอ (ถ้าใช้ไฟล์วิดีโอ)
+      - E:/Luam/yolov11_2/test_vehicle_videos/v4.mp4:/app/videos  
+      # ผูก Volume สำหรับการเก็บ Output/Snapshots
+      - ./output_data:/app/output_data
+      # # ผูก Volume สำหรับการแสดงผล GUI (ถ้าต้องการให้หน้าต่าง OpenCV แสดงผล)
+      # - /tmp/.X11-unix:/tmp/.X11-unix
+
+    # การตั้งค่า GPU (ถ้าใช้ NVIDIA GPU)
+    # ลบส่วนนี้ออกถ้าคุณรันบน CPU เท่านั้น
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    
+    depends_on:
+      - db
+
+
+  #2. DATABASE SERVICE (POSTGRESQL)
+  db:
+    image: postgres:14-alpine
+    container_name: vehicle_detection_db
+    environment:
+      POSTGRES_USER: user_detection
+      POSTGRES_PASSWORD: password_detection
+      POSTGRES_DB: db_detection
+
+    ports:
+      - "5432:5432"
+
+    # ผูก Volume เพื่อเก็บข้อมูล (ป้องกันข้อมูลหายเมื่อ Container ถูกลบ)
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
